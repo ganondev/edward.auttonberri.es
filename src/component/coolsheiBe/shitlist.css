@@ -1,0 +1,11 @@
+.item-link {
+    color: #fe4eda;
+    text-decoration: none;
+    text-shadow: 0 0 2px #fe4eda, 0 0 5px #fe4eda;
+}
+
+.item-link:hover {
+    color: rgb(252, 137, 162);
+    text-shadow: 0 0 2px #fe4eda, 0 0 5px #fe4eda, 0px 0px 5px red;
+    text-shadow: 0 0 1px #fe4eda, 0 0 2px #fe4eda, 0 0 3px #fe4eda, 0 0 4px #fe4eda, 0 0 5px #fe4eda;
+}

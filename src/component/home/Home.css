@@ -1,0 +1,42 @@
+.gameTableDiv
+{
+    margin: 30px;
+    text-align: center;
+
+}
+
+.homeTable
+{
+    margin-top: 75px;
+    height: 100%;
+    width: 100%;
+}
+
+td
+{
+    width: 50%;
+}
+
+td > ul
+{
+    text-align: center;
+}
+
+td > div
+{
+	width: 120px;
+	margin: auto;
+}
+
+td > img
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.me
+{
+    border: 1px solid green;
+    box-shadow: 0px 0px 5px 2px green;
+}

@@ -1,0 +1,25 @@
+.glow > a {
+	color: #00cc00;
+}
+
+.glow > a:hover {
+	color: #99ff99;
+}
+
+#footBanner {
+	
+	position: fixed;
+	bottom: 5px;
+	
+}
+
+#footBanner > p {
+	opacity: .3;
+}
+
+#footBanner > p:hover {
+	opacity: 1;
+	color: #99ff99;
+	text-decoration: none;
+    text-shadow: 0 0 2px #00cc00, 0 0 3px #00cc00, 0 0 5px #00cc00, 0 0 7px #00cc00;
+}
