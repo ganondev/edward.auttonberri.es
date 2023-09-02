@@ -17,10 +17,11 @@ function glowSurfaceCss(inline: boolean, glowColor?: string) {
 }
 
 interface GlowSurfaceProps {
-    inline: boolean;
-    extraStyles: CSSProperties;
+    inline?: boolean;
+    extraStyles?: CSSProperties;
     id?: string;
     glowColor?: string;
+    children: React.JSX.Element;
 }
 
 export default class GlowSurface extends React.Component<GlowSurfaceProps> {
@@ -35,7 +36,7 @@ export default class GlowSurface extends React.Component<GlowSurfaceProps> {
         return (
             
             //TODO Needs glow and padding variable and needs to fit children
-            <div id={this.props.id} style={concatStyles(glowSurfaceCss(this.props.inline), this.props.extraStyles)}>
+            <div id={this.props.id} style={concatStyles(glowSurfaceCss(this.props.inline || false), this.props.extraStyles || {})}>
 
                 {this.props.children}
 

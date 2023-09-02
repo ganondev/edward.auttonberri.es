@@ -1,5 +1,6 @@
 import request from 'request';
-import { get } from './request';
+// import { get } from './request';
+import axios from "axios";
 
 const steamApiUrl = 'https://api.auttonberri.es/steam/hours'
 
@@ -7,42 +8,43 @@ export function getSteamApps(callback: (result: SteamApp[] | 404) => void, ...fi
 
     const url = 'https://api.auttonberri.es/steam/hours';
 
-    request(url, {json: true}, (err, res, body) => {
+    // request(url, {json: true}, (err, res, body) => {
+    //
+    //     if (err) console.log(err);
+    //     else {
+    //
+    //         const apps: AppInfo[] = body.response.games;
+    //         console.log("Got steam hours:", apps);
+    //         if (!apps) {
+    //             console.log("Steam API get failed.");
+    //             callback(404);
+    //             return;
+    //         }
+    //         var filteredApps = (filter ? apps.filter((app: AppInfo) => filter.includes(app.appid)) : apps).map((app: AppInfo) => new SteamApp(app));
+    //         console.log("Filtered apps:", filteredApps);
+    //         callback(filteredApps);
+    //
+    //     }
+    //
+    // });
 
-        if (err) console.log(err);
-        else {
-
-            const apps: AppInfo[] = body.response.games;
-            console.log("Got steam hours:", apps);
-            if (!apps) {
-                console.log("Steam API get failed.");
-                callback(404);
-                return;
+    axios.get(url)
+        .catch(e => ({error: true, ...e}))
+        .then(response => {
+            if (response.error) console.log(response);
+            else {
+                const apps: AppInfo[] = response.data.response.games;
+                console.log("Got steam hours:", apps);
+                if (!apps) {
+                    console.log("Steam API get failed.");
+                    callback(404);
+                    return;
+                }
+                var filteredApps = (filter ? apps.filter((app: AppInfo) => filter.includes(app.appid)) : apps).map((app: AppInfo) => new SteamApp(app));
+                console.log("Filtered apps:", filteredApps);
+                callback(filteredApps);
             }
-            var filteredApps = (filter ? apps.filter((app: AppInfo) => filter.includes(app.appid)) : apps).map((app: AppInfo) => new SteamApp(app));
-            console.log("Filtered apps:", filteredApps);
-            callback(filteredApps);
 
-        }
-
-    });
-
-}
-
-export function t(callback: (result: SteamApp[] | 404) => void, ...filter: number[]): void {
-
-    get<{ games: AppInfo[] }>(steamApiUrl, 
-        result => {
-            const apps: AppInfo[] = result.games;
-            console.log("Got steam hours:", apps);
-            if (!apps) {
-                console.error("Steam API get failed.");
-                callback(404);
-                return;
-            }
-            var filteredApps = (filter ? apps.filter((app: AppInfo) => filter.includes(app.appid)) : apps).map((app: AppInfo) => new SteamApp(app));
-            console.log("Filtered apps:", filteredApps);
-            callback(filteredApps);
         });
 
 }

@@ -1,19 +1,31 @@
-import { get, API_URL } from './request';
+import { API_URL } from './request';
+import axios from "axios";
 
 const shitlistUrl: string = `${API_URL}/links`;
 
 export function getShit(callback: (result: ScheissDaten[]) => void): void {
-	
-	get<DynamoShit[]>(shitlistUrl,
-		result => {
+
+	// get<DynamoShit[]>(shitlistUrl,
+	// 	result => {
+	// 		callback(result.map(
+	// 			scheiss => new ScheissDaten(scheiss.description.S,
+	// 										scheiss.link.S,
+	// 										scheiss.name && scheiss.name.S,
+	// 										scheiss.tags && scheiss.tags.SS))
+	// 		);
+	// 	}
+	// );
+
+	axios.get(shitlistUrl)
+		.catch(e => e)
+		.then(result => {
 			callback(result.map(
-				scheiss => new ScheissDaten(scheiss.description.S,
-											scheiss.link.S,
-											scheiss.name && scheiss.name.S,
-											scheiss.tags && scheiss.tags.SS))
+				(scheiss: DynamoShit) => new ScheissDaten(scheiss.description.S,
+					scheiss.link.S,
+					scheiss.name && scheiss.name.S,
+					scheiss.tags && scheiss.tags.SS))
 			);
-		}
-	);
+		})
 	
 }
 

@@ -1,8 +1,8 @@
 import React, { Component, CSSProperties, PropsWithChildren } from 'react';
 import './Portfolio.css';
 import GlowSurface from '../themed/GlowSurface';
-import { NavLink, BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
+// import { NavLink, BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+// import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import resume from 'img/resume.pdf';
 import meAndHabibi from 'img/meandhabibi-downscale.jpg';
 import libantDemo from 'img/libantDemo.png';
@@ -24,32 +24,32 @@ export default class Portfolio extends Component {
 
         return  <div id="portfolio-root">
                     {/*TODO buttons to choose between pdf and doc types*/}
-                    <GlowSurface extraStyles={extraStyles} id="portfolio-area">
-                        <Route render={({location}) => (
-                            <>
-                                <div id="resume">
-                                    <NavLink to="/portfolio/resume" exact>[Resume]</NavLink>
-                                    <nav className="header title">
-                                        <ul>
-                                            <li><NavLink to="/portfolio/projects" exact activeClassName="portfolio-active">[Projects]</NavLink></li>
-                                            <li><NavLink to="/portfolio" exact activeClassName="portfolio-active">[About Me]</NavLink></li>
-                                            <li><NavLink to="/portfolio/experience" exact activeClassName="portfolio-active">[Experience]</NavLink></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                                <TransitionGroup style={{height:'79%'}}>
-                                    <CSSTransition key={location.key} classNames="portfolio-active" timeout={0}>
-                                        <Switch location={location}>
-                                            <Route exact path="/portfolio/resume" component={EmbedResume}/>
-                                            <Route exact path="/portfolio/projects" component={Projects}/>
-                                            <Route exact path="/portfolio" component={AboutMe}/>
-                                            <Route exact path="/portfolio/experience" component={Experience}/>
-                                        </Switch>
-                                    </CSSTransition>
-                                </TransitionGroup>
-                            </>
-                        )}/>
-                    </GlowSurface>
+                    {/*<GlowSurface extraStyles={extraStyles} id="portfolio-area">*/}
+                        {/*<Route render={({location}) => (*/}
+                        {/*    <>*/}
+                        {/*        <div id="resume">*/}
+                        {/*            <NavLink to="/portfolio/resume" exact>[Resume]</NavLink>*/}
+                        {/*            <nav className="header title">*/}
+                        {/*                <ul>*/}
+                        {/*                    <li><NavLink to="/portfolio/projects" exact activeClassName="portfolio-active">[Projects]</NavLink></li>*/}
+                        {/*                    <li><NavLink to="/portfolio" exact activeClassName="portfolio-active">[About Me]</NavLink></li>*/}
+                        {/*                    <li><NavLink to="/portfolio/experience" exact activeClassName="portfolio-active">[Experience]</NavLink></li>*/}
+                        {/*                </ul>*/}
+                        {/*            </nav>*/}
+                        {/*        </div>*/}
+                        {/*        <TransitionGroup style={{height:'79%'}}>*/}
+                        {/*            <CSSTransition key={location.key} classNames="portfolio-active" timeout={0}>*/}
+                        {/*                <Switch location={location}>*/}
+                        {/*                    <Route exact path="/portfolio/resume" component={EmbedResume}/>*/}
+                        {/*                    <Route exact path="/portfolio/projects" component={Projects}/>*/}
+                        {/*                    <Route exact path="/portfolio" component={AboutMe}/>*/}
+                        {/*                    <Route exact path="/portfolio/experience" component={Experience}/>*/}
+                        {/*                </Switch>*/}
+                        {/*            </CSSTransition>*/}
+                        {/*        </TransitionGroup>*/}
+                        {/*    </>*/}
+                        {/*)}/>*/}
+                    {/*</GlowSurface>*/}
                 </div>
 
     }
@@ -156,7 +156,7 @@ function Experience() {
     return <><p>TODO</p></>;
 }
 
-type ProjectProps = { title: string };
+type ProjectProps = { title: string, children: React.JSX.Element[] };
 class Project extends Component<ProjectProps> {
 
     render() {
