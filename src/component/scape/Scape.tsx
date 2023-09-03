@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC, useEffect, useRef} from 'react';
 import './Scape.css';
 
 // CONSTANTS
@@ -114,67 +114,60 @@ class Stars {
 
 }
 
-class Scape extends React.Component {
+const ScapeNew: FC = () => {
 
-    private static readonly CANVAS_ID = "scape";
-	
-	componentDidMount() {
-		
-        const canvas = document.getElementById(Scape.CANVAS_ID) as HTMLCanvasElement;
+    const canvRef = useRef<HTMLCanvasElement>(null);
+
+    useEffect(() => {
+
+        const canvas = canvRef.current;
 
         if (!canvas) {
             console.error("Could not locate the scape canvas elementduring the Scape component's mount phase.");
             return;
         }
 
-        const maybeCtx: CanvasRenderingContext2D | null = canvas.getContext("2d");
-        
-        if (!maybeCtx) {
+        const ctx = canvas.getContext("2d");
+
+        if (!ctx) {
             console.error("Could not retreive 2D context from canvas element.");
             return;
         }
 
-        const ctx = maybeCtx;
+        ctx.imageSmoothingEnabled = false;
+        ctx.shadowBlur = 0;
 
+        const W = canvas.width = canvas.clientWidth;
+        const H = canvas.height = canvas.clientHeight;
 
-		ctx.imageSmoothingEnabled = false;
-		ctx.shadowBlur = 0;
-		
-		const W = canvas.width = canvas.clientWidth;
-		const H = canvas.height = canvas.clientHeight;
-		
-		const stars = new Stars(W, H);
-	
-		for(let i = 0; i < STAR_COUNT; i++) stars.pushNewStar();
-		
-		function drawScape()
-		{
-		
-			ctx.clearRect(0, 0, W, H);
-			ctx.fillStyle = "white";
-            ctx.beginPath();
-			stars.stars.forEach((star) => {
-			
-				ctx.moveTo(star.x, star.y);
-				ctx.rect(star.x, star.y, star.size, star.size);
-			 
-			});
-            ctx.fill();
-            
-			stars.redrawStars();
-		
-		}
-		
-		setInterval(drawScape, 10);
-			
-	}
-	
-	render() {
-		
-		return <canvas id="scape"></canvas>
-		
-	}
-	
+        const stars = new Stars(W, H);
+
+        for(let i = 0; i < STAR_COUNT; i++) stars.pushNewStar();
+
+        function drawScape()
+        {
+
+            ctx!.clearRect(0, 0, W, H);
+            ctx!.fillStyle = "white";
+            ctx!.beginPath();
+            stars.stars.forEach((star) => {
+
+                ctx!.moveTo(star.x, star.y);
+                ctx!.rect(star.x, star.y, star.size, star.size);
+
+            });
+            ctx!.fill();
+
+            stars.redrawStars();
+
+        }
+
+        setInterval(drawScape, 10);
+
+    }, []);
+
+    return <canvas id="scape" ref={canvRef}/>;
+
 }
 
-export default Scape;
+export default ScapeNew;
