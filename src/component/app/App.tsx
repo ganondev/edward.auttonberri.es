@@ -1,5 +1,5 @@
-import React, {createRef} from 'react';
-import { BrowserRouter as Router, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import React, {createRef, FC} from 'react';
+import { RouterProvider, createBrowserRouter, Outlet } from 'react-router-dom';
 import './App.css';
 import { Footer, Header } from '../nav/Nav';
 import Home from '../home/Home';
@@ -8,23 +8,46 @@ import Page404 from '../page404/Page404'
 import Scape from '../scape/Scape';
 import Portfolio from '../portfolio/Portfolio';
 
+type FCWithChildren<T = {}> = FC<T & { children?: React.JSX.Element }>;
+
+const Root: FCWithChildren = ({children}) => {
+    return (
+        <>
+            <Header />
+            <hr id="glowBar"></hr>
+            <Scape />
+            { children || <Outlet /> }
+            <Footer />
+        </>
+    )
+}
+
+const Error = () => {
+    return <Root>
+        <Page404/>
+    </Root>
+}
+
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Home />,
-        errorElement: <Page404 />
-    },
-    {
-        path: "/home",
-        element: <Home />,
-    },
-    {
-        path: "/coolescheiBe",
-        element: <Scheissliste />,
-    },
-    {
-        path: "/portfolio",
-        element: <Portfolio />,
+        element: <Root/>,
+        errorElement: <Error />,
+        children: [
+            {
+                index: true,
+                path: "/",
+                element: <Home />,
+            },
+            {
+                path: "/coolescheiBe",
+                element: <Scheissliste />,
+            },
+            {
+                path: "/portfolio",
+                element: <Portfolio />,
+            },
+        ]
     },
 ]);
 
@@ -32,13 +55,7 @@ export default function App() {
     return (
 
         <div className="App" ref={createRef()}>
-            <Router >
-                <Header />
-                <hr id="glowBar"></hr>
-                <Scape />
-                <RouterProvider router={router} />
-                <Footer />
-            </Router>
+            <RouterProvider router={router} />
         </div>
 
     );
