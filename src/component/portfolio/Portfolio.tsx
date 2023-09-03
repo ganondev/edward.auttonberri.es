@@ -1,11 +1,10 @@
 import React, { Component, CSSProperties, PropsWithChildren } from 'react';
 import './Portfolio.css';
 import GlowSurface from '../themed/GlowSurface';
-// import { NavLink, BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-// import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import resume from 'img/resume.pdf';
 import meAndHabibi from 'img/meandhabibi-downscale.jpg';
 import libantDemo from 'img/libantDemo.png';
+import {NavLink, Outlet} from "react-router-dom";
 
 export default class Portfolio extends Component {
 
@@ -23,40 +22,28 @@ export default class Portfolio extends Component {
         };
 
         return  <div id="portfolio-root">
-                    {/*TODO buttons to choose between pdf and doc types*/}
-                    {/*<GlowSurface extraStyles={extraStyles} id="portfolio-area">*/}
-                        {/*<Route render={({location}) => (*/}
-                        {/*    <>*/}
-                        {/*        <div id="resume">*/}
-                        {/*            <NavLink to="/portfolio/resume" exact>[Resume]</NavLink>*/}
-                        {/*            <nav className="header title">*/}
-                        {/*                <ul>*/}
-                        {/*                    <li><NavLink to="/portfolio/projects" exact activeClassName="portfolio-active">[Projects]</NavLink></li>*/}
-                        {/*                    <li><NavLink to="/portfolio" exact activeClassName="portfolio-active">[About Me]</NavLink></li>*/}
-                        {/*                    <li><NavLink to="/portfolio/experience" exact activeClassName="portfolio-active">[Experience]</NavLink></li>*/}
-                        {/*                </ul>*/}
-                        {/*            </nav>*/}
-                        {/*        </div>*/}
-                        {/*        <TransitionGroup style={{height:'79%'}}>*/}
-                        {/*            <CSSTransition key={location.key} classNames="portfolio-active" timeout={0}>*/}
-                        {/*                <Switch location={location}>*/}
-                        {/*                    <Route exact path="/portfolio/resume" component={EmbedResume}/>*/}
-                        {/*                    <Route exact path="/portfolio/projects" component={Projects}/>*/}
-                        {/*                    <Route exact path="/portfolio" component={AboutMe}/>*/}
-                        {/*                    <Route exact path="/portfolio/experience" component={Experience}/>*/}
-                        {/*                </Switch>*/}
-                        {/*            </CSSTransition>*/}
-                        {/*        </TransitionGroup>*/}
-                        {/*    </>*/}
-                        {/*)}/>*/}
-                    {/*</GlowSurface>*/}
+            {/*TODO buttons to choose between pdf and doc types*/}
+            {/*// @ts-ignore*/}
+            <GlowSurface extraStyles={extraStyles} id="portfolio-area">
+                <div id="resume">
+                    <NavLink to="/portfolio/resume">[Resume]</NavLink>
+                    <nav className="header title">
+                        <ul>
+                            <li><NavLink to="/portfolio/projects">[Projects]</NavLink></li>
+                            <li><NavLink to="/portfolio">[About Me]</NavLink></li>
+                            <li><NavLink to="/portfolio/experience">[Experience]</NavLink></li>
+                        </ul>
+                    </nav>
                 </div>
+                <Outlet />
+            </GlowSurface>
+        </div>
 
     }
 
 }
 
-function EmbedResume() {
+export function EmbedResume() {
     return <>
         <div style={{height: '100%'}}>
             <embed src={resume} width="100%" height="100%"/>
@@ -64,7 +51,7 @@ function EmbedResume() {
     </>
 }
 
-function Projects() {
+export function Projects() {
     
     return  <>
                 <div style={{}}>
@@ -146,13 +133,13 @@ function Projects() {
             </>
 }
 
-function AboutMe() {
+export function AboutMe() {
     return <>
     <img src={meAndHabibi} />
     </>;
 }
 
-function Experience() {
+export function Experience() {
     return <><p>TODO</p></>;
 }
 

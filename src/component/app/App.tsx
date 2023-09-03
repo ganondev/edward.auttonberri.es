@@ -6,7 +6,7 @@ import Home from '../home/Home';
 import { Scheissliste } from '../coolsheiBe/shitlist'
 import Page404 from '../page404/Page404'
 import Scape from '../scape/Scape';
-import Portfolio from '../portfolio/Portfolio';
+import Portfolio, {AboutMe, EmbedResume, Experience, Projects} from '../portfolio/Portfolio';
 
 type FCWithChildren<T = {}> = FC<T & { children?: React.JSX.Element }>;
 
@@ -36,7 +36,6 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                path: "/",
                 element: <Home />,
             },
             {
@@ -46,6 +45,24 @@ const router = createBrowserRouter([
             {
                 path: "/portfolio",
                 element: <Portfolio />,
+                children: [
+                    {
+                        path: "/portfolio",
+                        element: <AboutMe />,
+                    },
+                    {
+                        path: "/portfolio/projects",
+                        element: <Projects />,
+                    },
+                    {
+                        path: "/portfolio/experience",
+                        element: <Experience />,
+                    },
+                    {
+                        path: "/portfolio/resume",
+                        element: <EmbedResume />,
+                    }
+                ]
             },
         ]
     },
