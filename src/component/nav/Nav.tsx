@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC, useEffect, useMemo, useState} from 'react';
 import { getQuote, Quote } from '../../util/service-requests/quote-requests';
 import { Link } from 'react-router-dom';
 import './Nav.css';
@@ -32,38 +32,31 @@ export function Header() {
 
 type FooterState = { result: Quote };
 
-export class Footer extends React.Component<{}, FooterState> {
+export const Footer: FC = () => {
 
-    private static readonly LOADING_STATE: FooterState = { result: { quote: "..." } };
-
-    state = Footer.LOADING_STATE;
-
-    get formedQuote(): string {
-
-        const quoteObject: Quote = this.state.result;
-        return quoteObject.quote + (quoteObject.author ? " -" + quoteObject.author : "");
-
-    }
-
-    componentDidMount() {
-
-        getQuote((body: Quote) => {
-
-            this.setState({ result: body });
-
+    const [quote, setQuote] = useState<FooterState>(
+        {
+            result: {
+                quote: "..."
+            }
         });
 
-    }
+    const formedQuote = useMemo(() => {
+        const quoteObject: Quote = quote.result;
+        return quoteObject.quote + (quoteObject.author ? " -" + quoteObject.author : "");
+    }, [quote]);
 
-    render() {
+    useEffect(() => {
+        getQuote((body: Quote) => {
 
-        // TODO neon flicker transition
-        return (
-            <footer id="footBanner">
-                <p>{this.formedQuote}</p>
-            </footer>
-        );
+            setQuote({ result: body });
 
-    }
+        });
+    }, []);
 
+    return (
+        <footer id="footBanner">
+            <p>{formedQuote}</p>
+        </footer>
+    )
 }
