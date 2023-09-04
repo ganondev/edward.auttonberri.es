@@ -43,7 +43,14 @@ const GameStat: FC<GameStatProps> = ({apps}) => {
                 color: theme.textGold,
                 textShadow: glowString(theme.textGold, 1, 9, 13),
             }}>Most Played Games</span>
-            {mostPlayedError && <span>API Error :(</span>}
+            {mostPlayedError && (
+                <span
+                    style={{
+                        color: theme.textRed,
+                        textShadow: glowString(theme.glowRed, 1, 2, 5, 10),
+                    }}
+                >API Error :(</span>
+            )}
             {!mostPlayedError && !mostPlayed.length && (
                 <span style={{
                     color: theme.textBlue,

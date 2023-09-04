@@ -3,6 +3,8 @@ import { CSSProperties } from 'react';
 export const theme = {
 	
 	green: "#00cc00",
+	textRed: "#e86363",
+	glowRed: "#e72e2e",
 	textBlue: "#0092f2",
 	textGold: "#eace00",
 	magenta: "#fe4eda"
