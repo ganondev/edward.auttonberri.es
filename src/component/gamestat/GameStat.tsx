@@ -1,83 +1,62 @@
-import React, { Component } from 'react';
+import React, {Component, FC, useEffect, useState} from 'react';
 import { getSteamApps, SteamApp } from '../../util/service-requests/steam-requests';
 import './GameStat.css';
 
-type GameStatProps = { withHeader: boolean, apps: number[] };
+type GameStatProps = { withHeader?: boolean, apps: number[] };
 type GameStatState = { apps: SteamApp[] | 404 };
 
-export default class GameStat extends Component<GameStatProps, GameStatState> {
+const GameStat: FC<GameStatProps> = ({withHeader, apps}) => {
 
-    static readonly defaultProps = {
+    const [state, setState] = useState<GameStatState | null>(null);
 
-        withHeader: false
+    useEffect(() => {
+        getSteamApps((apps) => {
 
-    };
+            setState({apps: apps});
 
-    get gameTable() {
+        }, ...apps);
+    }, [apps]);
 
-        if (this.state) {
+    if (state) {
 
-            return(
+        return(
 
-                this.state.apps === 404 ?
+            state.apps === 404 ?
 
-                    (<p>Steam API broke :(</p>)
+                (<p>Steam API broke :(</p>)
 
                 :
 
-                    (<table>
+                (<table>
 
-                        <tbody>
+                    <tbody>
 
-                            {this.props.withHeader && <tr className="gameStatRecord">
-                                <td className="gameStatHeader">Game</td>
-                                <td className="gameStatHeader">Hours</td>
-                            </tr>}
-                            {this.state.apps.map( 
-                                (app) => {
-                                    return (
-                                        <tr key={Math.random()} className="gameStatRecord">
-                                            <td className="gameStatRecordID"><span className="gameStatCellIDData">{app.shortName}</span></td>
-                                            <td><span className="gameStatCellData">{app.time.hours}</span></td>
-                                        </tr>
-                                    );
-                                }
-                            )}
+                    {withHeader && <tr className="gameStatRecord">
+                        <td className="gameStatHeader">Game</td>
+                        <td className="gameStatHeader">Hours</td>
+                    </tr>}
+                    {state.apps.map(
+                        (app) => {
+                            return (
+                                <tr key={Math.random()} className="gameStatRecord">
+                                    <td className="gameStatRecordID"><span className="gameStatCellIDData">{app.shortName}</span></td>
+                                    <td><span className="gameStatCellData">{app.time.hours}</span></td>
+                                </tr>
+                            );
+                        }
+                    )}
 
-                        </tbody>
-                        
-                    </table>)
+                    </tbody>
 
-            );
+                </table>)
 
-        } else {
+        );
 
-            return <p>no apps</p>;
+    } else {
 
-        }
-
-    }
-
-    constructor(props: GameStatProps) {
-
-        super(props);
-        this.setState(null);
-
-    }
-
-    componentDidMount() {
-
-        getSteamApps((apps) => {
-
-            this.setState({apps: apps});
-
-        }, ...this.props.apps);
-
-    }
-
-    render() {
-
-        return this.gameTable;
+        return <p>no apps</p>;
 
     }
 }
+
+export default GameStat;
