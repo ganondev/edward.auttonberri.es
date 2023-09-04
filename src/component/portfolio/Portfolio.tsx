@@ -1,4 +1,4 @@
-import React, { Component, CSSProperties, PropsWithChildren } from 'react';
+import React, {Component, CSSProperties, FC, PropsWithChildren} from 'react';
 import './Portfolio.css';
 import GlowSurface from '../themed/GlowSurface';
 import resume from 'img/resume.pdf';
@@ -6,42 +6,36 @@ import meAndHabibi from 'img/meandhabibi-downscale.jpg';
 import libantDemo from 'img/libantDemo.png';
 import {NavLink, Outlet} from "react-router-dom";
 
-export default class Portfolio extends Component {
+const extraStyles: CSSProperties = {
+    width: '50%',
+    paddingLeft: '1rem',
+    paddingRight: '1.3rem',
+    paddingBottom: '1.3rem',
+    //height: '95%',
+    overflowY: 'scroll',
+    overflowX: 'hidden',
+    textOverflow: 'wrap'
+};
 
-    render() {
-
-        const extraStyles: CSSProperties = {
-            width: '50%',
-            paddingLeft: '1rem',
-            paddingRight: '1.3rem',
-            paddingBottom: '1.3rem',
-            //height: '95%',
-            overflowY: 'scroll',
-            overflowX: 'hidden',
-            textOverflow: 'wrap'
-        };
-
-        return  <div id="portfolio-root">
-            {/*TODO buttons to choose between pdf and doc types*/}
-            {/*// @ts-ignore*/}
-            <GlowSurface extraStyles={extraStyles} id="portfolio-area">
-                <div id="resume">
-                    <NavLink to="/portfolio/resume">[Resume]</NavLink>
-                    <nav className="header title">
-                        <ul>
-                            <li><NavLink to="/portfolio/projects">[Projects]</NavLink></li>
-                            <li><NavLink to="/portfolio">[About Me]</NavLink></li>
-                            <li><NavLink to="/portfolio/experience">[Experience]</NavLink></li>
-                        </ul>
-                    </nav>
-                </div>
-                <Outlet />
-            </GlowSurface>
-        </div>
-
-    }
-
-}
+export const Portfolio: FC = () => (
+    <div id="portfolio-root">
+        {/*TODO buttons to choose between pdf and doc types*/}
+        {/*// @ts-ignore*/}
+        <GlowSurface extraStyles={extraStyles} id="portfolio-area">
+            <div id="resume">
+                <NavLink to="/portfolio/resume">[Resume]</NavLink>
+                <nav className="header title">
+                    <ul>
+                        <li><NavLink to="/portfolio/projects">[Projects]</NavLink></li>
+                        <li><NavLink to="/portfolio">[About Me]</NavLink></li>
+                        <li><NavLink to="/portfolio/experience">[Experience]</NavLink></li>
+                    </ul>
+                </nav>
+            </div>
+            <Outlet />
+        </GlowSurface>
+    </div>
+)
 
 export function EmbedResume() {
     return <>

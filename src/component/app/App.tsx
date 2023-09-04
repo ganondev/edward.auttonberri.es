@@ -1,4 +1,4 @@
-import React, {createRef, FC} from 'react';
+import React, {createRef} from 'react';
 import { RouterProvider, createBrowserRouter, Outlet } from 'react-router-dom';
 import './App.css';
 import { Footer, Header } from '../nav/Nav';
@@ -6,9 +6,8 @@ import Home from '../home/Home';
 import { Scheissliste } from '../coolsheiBe/shitlist'
 import Page404 from '../page404/Page404'
 import Scape from '../scape/Scape';
-import Portfolio, {AboutMe, EmbedResume, Experience, Projects} from '../portfolio/Portfolio';
-
-type FCWithChildren<T = {}> = FC<T & { children?: React.JSX.Element }>;
+import {Portfolio, AboutMe, EmbedResume, Experience, Projects} from '../portfolio/Portfolio';
+import {FCWithChildren} from '../../util';
 
 const Root: FCWithChildren = ({children}) => {
     return (

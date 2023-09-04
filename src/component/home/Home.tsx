@@ -16,8 +16,7 @@ export default function Home() {
                         <td>
                             <GlowSurface>
                                 <ul>
-                                    <li key="1"><a href="https://github.com/zefaxet">[GitHub]</a></li>
-                                    <li key="2"><a href="https://www.facebook.com/Arceus2384">[Facebook]</a></li>
+                                    <li key="1"><a href="https://github.com/ganondev">[GitHub]</a></li>
                                     <li key="3"><a href="https://www.linkedin.com/in/edward-auttonberry">[LinkedIn]</a></li>
                                 </ul>
                             </GlowSurface>
