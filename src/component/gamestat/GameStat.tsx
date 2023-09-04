@@ -3,9 +3,9 @@ import { getSteamApps, SteamApp } from '../../util/service-requests/steam-reques
 import {GlowSurfaceNew} from "../themed/GlowSurface";
 import {theme} from "../../util/cssbuild";
 
-type GameStatProps = { withHeader?: boolean, apps: number[] };
+type GameStatProps = { apps: number[] };
 
-const GameStat: FC<GameStatProps> = ({withHeader, apps}) => {
+const GameStat: FC<GameStatProps> = ({apps}) => {
 
     const [mostPlayed, setMostPlayed] = useState<SteamApp[]>([]);
     const [mostPlayedError, setMostPlayedError] = useState<boolean>(false);
