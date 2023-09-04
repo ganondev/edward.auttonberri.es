@@ -70,7 +70,7 @@ const router = createBrowserRouter([
 export default function App() {
     return (
 
-        <div className="App" ref={createRef()}>
+        <div className="App" style={{height: "98vh"}} ref={createRef()}>
             <RouterProvider router={router} />
         </div>
 
