@@ -1,6 +1,5 @@
-import React, {Component, FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import { getSteamApps, SteamApp } from '../../util/service-requests/steam-requests';
-import './GameStat.css';
 import {GlowSurfaceNew} from "../themed/GlowSurface";
 import {theme} from "../../util/cssbuild";
 
