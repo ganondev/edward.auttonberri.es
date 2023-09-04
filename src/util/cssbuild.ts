@@ -9,8 +9,11 @@ export const theme = {
 	
 }
 
+export function glowString(color: string | number, ...radii: number[]): string {
 
-export const themeGreen = "#00cc00";
+	return radii.map(radius => `0 0 ${radius}px ${color}`).join(",");
+
+}
 
 export function concatStyles(...styles: CSSProperties[]): CSSProperties {
 	

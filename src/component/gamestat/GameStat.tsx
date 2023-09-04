@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import { getSteamApps, SteamApp } from '../../util/service-requests/steam-requests';
 import {GlowSurfaceNew} from "../themed/GlowSurface";
-import {theme} from "../../util/cssbuild";
+import {glowString, theme} from "../../util/cssbuild";
 
 type GameStatProps = { apps: number[] };
 
@@ -33,13 +33,23 @@ const GameStat: FC<GameStatProps> = ({apps}) => {
     }, [apps]);
 
     return (
-        <GlowSurfaceNew style={{flexDirection: "column", alignItems: "center", rowGap: "10px"}}>
+        <GlowSurfaceNew style={{
+            flexDirection: "column",
+            alignItems: "center",
+            rowGap: "10px",
+            padding: "10px",
+        }}>
             <span style={{
                 color: theme.textGold,
-                textShadow: `0 0 1px ${theme.textGold}, 0 0 9px ${theme.textGold}, 0 0 13px ${theme.textGold}`,
+                textShadow: glowString(theme.textGold, 1, 9, 13),
             }}>Most Played Games</span>
             {mostPlayedError && <span>API Error :(</span>}
-            {!mostPlayedError && !mostPlayed.length && <span>LOADING</span>}
+            {!mostPlayedError && !mostPlayed.length && (
+                <span style={{
+                    color: theme.textBlue,
+                    textShadow: glowString(theme.textBlue, 3, 9, 11),
+                }}>Loading...</span>
+            )}
             <div style={{
                 width: "95%",
             }}>
@@ -56,11 +66,12 @@ const GameStat: FC<GameStatProps> = ({apps}) => {
                         >
                             <span style={{
                                 color: theme.textBlue,
-                                textShadow: `0 0 3px ${theme.textBlue}, 0 0 9px ${theme.textBlue}, 0 0 11px ${theme.textBlue}`,
+                                textShadow: glowString(theme.textBlue, 3, 9, 11),
                             }}>{app.shortName}</span>
                             <span
                                 style={{
-                                    color: theme.green
+                                    color: theme.green,
+                                    textShadow: glowString(theme.green, 10)
                                 }}
                             >{app.time.hours}</span>
                         </div>
