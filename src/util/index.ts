@@ -1,3 +1,3 @@
-import React, {FC} from "react";
+import {FC, PropsWithChildren} from "react";
 
-export type FCWithChildren<T = {}> = FC<T & { children?: React.JSX.Element }>;
+export type FCWithChildren<T = {}> = FC<PropsWithChildren<T>>;
