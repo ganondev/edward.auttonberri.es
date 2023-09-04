@@ -10,11 +10,24 @@ const GameStat: FC<GameStatProps> = ({withHeader, apps}) => {
     const [state, setState] = useState<GameStatState | null>(null);
 
     useEffect(() => {
-        getSteamApps((apps) => {
-
-            setState({apps: apps});
-
-        }, ...apps);
+        getSteamApps()
+            .then(result => {
+                const games = result.data.response.games;
+                if (!games) {
+                    console.error("No games from steam api.", result);
+                    return;
+                }
+                const filteredApps = (
+                    (games?.length)
+                        ? games.filter((game) => apps.includes(game.appid))
+                        : games)
+                    .map((app) => new SteamApp(app));
+                setState({apps: filteredApps});
+            })
+            .catch(e => {
+                console.error(e);
+                setState({apps: 404});
+            });
     }, [apps]);
 
     if (state) {

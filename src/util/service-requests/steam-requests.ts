@@ -1,51 +1,31 @@
-import request from 'request';
-// import { get } from './request';
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
 
-const steamApiUrl = 'https://api.auttonberri.es/steam/hours'
+const url = 'https://api.auttonberri.es/steam/hours';
 
-export function getSteamApps(callback: (result: SteamApp[] | 404) => void, ...filter: number[]): void {
+interface SteamGame {
+    appid: number;
+    playtime_disconnected: number;
+    playtime_forever: number;
+    playtime_linux_forever: number;
+    playtime_mac_forever: number;
+    playtime_windows_forever: number;
+    rtime_last_played: number;
+}
 
-    const url = 'https://api.auttonberri.es/steam/hours';
+interface SteamHours {
+    game_count: number;
+    games: SteamGame[];
+}
 
-    // request(url, {json: true}, (err, res, body) => {
-    //
-    //     if (err) console.log(err);
-    //     else {
-    //
-    //         const apps: AppInfo[] = body.response.games;
-    //         console.log("Got steam hours:", apps);
-    //         if (!apps) {
-    //             console.log("Steam API get failed.");
-    //             callback(404);
-    //             return;
-    //         }
-    //         var filteredApps = (filter ? apps.filter((app: AppInfo) => filter.includes(app.appid)) : apps).map((app: AppInfo) => new SteamApp(app));
-    //         console.log("Filtered apps:", filteredApps);
-    //         callback(filteredApps);
-    //
-    //     }
-    //
-    // });
+interface SteamHoursResponse {
+    response: SteamHours;
+}
 
-    axios.get(url)
-        .catch(e => ({error: true, ...e}))
-        .then(response => {
-            if (response.error) console.log(response);
-            else {
-                const apps: AppInfo[] = response.data.response.games;
-                console.log("Got steam hours:", apps);
-                if (!apps) {
-                    console.log("Steam API get failed.");
-                    callback(404);
-                    return;
-                }
-                var filteredApps = (filter ? apps.filter((app: AppInfo) => filter.includes(app.appid)) : apps).map((app: AppInfo) => new SteamApp(app));
-                console.log("Filtered apps:", filteredApps);
-                callback(filteredApps);
-            }
+type R<T> = AxiosResponse<T>;
 
-        });
+export async function getSteamApps(): Promise<R<SteamHoursResponse>> {
+
+    return axios.get(url);
 
 }
 
@@ -53,19 +33,11 @@ const shortNames: { [longName: string]: string } = {
     "Counter-Strike: Global Offensive": "CS:GO"
 }
 
-export interface AppInfo {
-
-    name: string;
-    appid: number;
-    playtime_forever: number;
-
-}
-
 export class SteamApp {
 
     get name(): string {
 
-        return this.app.name;
+        return "TODO";
 
     }
 
@@ -87,7 +59,7 @@ export class SteamApp {
 
     }
 
-    constructor(private app: AppInfo) {}
+    constructor(private app: SteamGame) {}
 
     //TODO make other requests to get this stuff
 
