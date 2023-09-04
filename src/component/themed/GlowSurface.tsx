@@ -1,6 +1,7 @@
-import React, { CSSProperties } from 'react'
+import React, {CSSProperties, DetailedHTMLProps, FC, HTMLAttributes, PropsWithChildren} from 'react'
 import './GlowSurface.css'
 import { concatStyles } from '../../util/cssbuild';
+import {FCWithChildren} from "../../util";
 
 function glowSurfaceCss(inline: boolean, glowColor?: string) {
 
@@ -21,29 +22,33 @@ interface GlowSurfaceProps {
     extraStyles?: CSSProperties;
     id?: string;
     glowColor?: string;
-    children: React.JSX.Element;
 }
 
-export default class GlowSurface extends React.Component<GlowSurfaceProps> {
-
-    static readonly defaultProps = {
-        inline: false,
-        extraStyles: {}
-    }
-
-    render() {
-
-        return (
-            
-            //TODO Needs glow and padding variable and needs to fit children
-            <div id={this.props.id} style={concatStyles(glowSurfaceCss(this.props.inline || false), this.props.extraStyles || {})}>
-
-                {this.props.children}
-
-            </div>
-
-        );
-
-    }
-
+const GlowSurface: FCWithChildren<GlowSurfaceProps> = ({id, inline, extraStyles, children}) => {
+    return (
+        //TODO Needs glow and padding variable and needs to fit children
+        <div id={id} style={concatStyles(glowSurfaceCss(inline || false), extraStyles || {})}>
+            {children}
+        </div>
+    );
 }
+
+export const GlowSurfaceNew: FC<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>> = ({
+    style, ...rest
+}) => {
+    return <div
+        style={{
+            ...(style || {}),
+            background: style?.background || 'black',
+            padding: style?.padding || '5px',
+            border: style?.border || '1px solid green',
+            boxShadow: style?.boxShadow || '0px 0px 3px 1px green',
+            display: style?.display || "flex",
+            minWidth: style?.minWidth || "fit-content",
+        }}
+        {...rest}
+    >
+    </div>
+}
+
+export default GlowSurface;
