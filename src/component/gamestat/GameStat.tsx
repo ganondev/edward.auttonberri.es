@@ -41,29 +41,33 @@ const GameStat: FC<GameStatProps> = ({withHeader, apps}) => {
             }}>Most Played Games</span>
             {mostPlayedError && <span>API Error :(</span>}
             {!mostPlayedError && !mostPlayed.length && <span>LOADING</span>}
-            {!!mostPlayed.length && (
-                mostPlayed.map(app => (
-                    <div
-                        style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "space-between",
-                            width: "100%",
-                        }}
-                        key={app.appId}
-                    >
-                        <span style={{
-                            color: theme.textBlue,
-                            textShadow: `0 0 3px ${theme.textBlue}, 0 0 9px ${theme.textBlue}, 0 0 11px ${theme.textBlue}`,
-                        }}>{app.shortName}</span>
-                        <span
+            <div style={{
+                width: "95%",
+            }}>
+                {!!mostPlayed.length && (
+                    mostPlayed.map(app => (
+                        <div
                             style={{
-                                color: theme.green
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "space-between",
+                                width: "100%",
                             }}
-                        >{app.time.hours}</span>
-                    </div>
-                ))
-            )}
+                            key={app.appId}
+                        >
+                            <span style={{
+                                color: theme.textBlue,
+                                textShadow: `0 0 3px ${theme.textBlue}, 0 0 9px ${theme.textBlue}, 0 0 11px ${theme.textBlue}`,
+                            }}>{app.shortName}</span>
+                            <span
+                                style={{
+                                    color: theme.green
+                                }}
+                            >{app.time.hours}</span>
+                        </div>
+                    ))
+                )}
+            </div>
         </GlowSurfaceNew>
     );
 
