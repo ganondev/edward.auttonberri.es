@@ -4,12 +4,15 @@ const url = 'https://api.auttonberri.es/steam/hours';
 
 interface SteamGame {
     appid: number;
-    playtime_disconnected: number;
+    name: string;
     playtime_forever: number;
-    playtime_linux_forever: number;
-    playtime_mac_forever: number;
+    img_icon_url: string;
     playtime_windows_forever: number;
+    playtime_mac_forever: 0;
+    playtime_linux_forever: number;
     rtime_last_played: number;
+    content_descriptorids: number[];
+    playtime_disconnected: number;
 }
 
 interface SteamHours {
@@ -29,21 +32,21 @@ export async function getSteamApps(): Promise<R<SteamHoursResponse>> {
 
 }
 
-const shortNames: { [longName: string]: string } = {
-    "Counter-Strike: Global Offensive": "CS:GO"
-}
+const shortNames: {[id: number]: string} = {
+    730: "CS:GO"
+};
 
 export class SteamApp {
 
     get name(): string {
 
-        return "TODO";
+        return this.app.name;
 
     }
 
     get shortName(): string {
 
-        return shortNames[this.name] || this.name;
+        return shortNames[this.appId] || this.name;
 
     }
 

@@ -1,13 +1,15 @@
 import React, {Component, FC, useEffect, useState} from 'react';
 import { getSteamApps, SteamApp } from '../../util/service-requests/steam-requests';
 import './GameStat.css';
+import {GlowSurfaceNew} from "../themed/GlowSurface";
+import {theme} from "../../util/cssbuild";
 
 type GameStatProps = { withHeader?: boolean, apps: number[] };
-type GameStatState = { apps: SteamApp[] | 404 };
 
 const GameStat: FC<GameStatProps> = ({withHeader, apps}) => {
 
-    const [state, setState] = useState<GameStatState | null>(null);
+    const [mostPlayed, setMostPlayed] = useState<SteamApp[]>([]);
+    const [mostPlayedError, setMostPlayedError] = useState<boolean>(false);
 
     useEffect(() => {
         getSteamApps()
@@ -15,6 +17,7 @@ const GameStat: FC<GameStatProps> = ({withHeader, apps}) => {
                 const games = result.data.response.games;
                 if (!games) {
                     console.error("No games from steam api.", result);
+                    setMostPlayedError(true);
                     return;
                 }
                 const filteredApps = (
@@ -22,54 +25,48 @@ const GameStat: FC<GameStatProps> = ({withHeader, apps}) => {
                         ? games.filter((game) => apps.includes(game.appid))
                         : games)
                     .map((app) => new SteamApp(app));
-                setState({apps: filteredApps});
+                setMostPlayed(filteredApps);
             })
             .catch(e => {
                 console.error(e);
-                setState({apps: 404});
+                setMostPlayedError(true);
             });
     }, [apps]);
 
-    if (state) {
+    return (
+        <GlowSurfaceNew style={{flexDirection: "column", alignItems: "center", rowGap: "10px"}}>
+            <span style={{
+                color: theme.textGold,
+                textShadow: `0 0 1px ${theme.textGold}, 0 0 9px ${theme.textGold}, 0 0 13px ${theme.textGold}`,
+            }}>Most Played Games</span>
+            {mostPlayedError && <span>API Error :(</span>}
+            {!mostPlayedError && !mostPlayed.length && <span>LOADING</span>}
+            {!!mostPlayed.length && (
+                mostPlayed.map(app => (
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            width: "100%",
+                        }}
+                        key={app.appId}
+                    >
+                        <span style={{
+                            color: theme.textBlue,
+                            textShadow: `0 0 3px ${theme.textBlue}, 0 0 9px ${theme.textBlue}, 0 0 11px ${theme.textBlue}`,
+                        }}>{app.shortName}</span>
+                        <span
+                            style={{
+                                color: theme.green
+                            }}
+                        >{app.time.hours}</span>
+                    </div>
+                ))
+            )}
+        </GlowSurfaceNew>
+    );
 
-        return(
-
-            state.apps === 404 ?
-
-                (<p>Steam API broke :(</p>)
-
-                :
-
-                (<table>
-
-                    <tbody>
-
-                    {withHeader && <tr className="gameStatRecord">
-                        <td className="gameStatHeader">Game</td>
-                        <td className="gameStatHeader">Hours</td>
-                    </tr>}
-                    {state.apps.map(
-                        (app) => {
-                            return (
-                                <tr key={Math.random()} className="gameStatRecord">
-                                    <td className="gameStatRecordID"><span className="gameStatCellIDData">{app.shortName}</span></td>
-                                    <td><span className="gameStatCellData">{app.time.hours}</span></td>
-                                </tr>
-                            );
-                        }
-                    )}
-
-                    </tbody>
-
-                </table>)
-
-        );
-
-    } else {
-
-        return <p>no apps</p>;
-
-    }
 }
 
 export default GameStat;
