@@ -22,8 +22,7 @@ export const Projects: FC = () => {
             style={{
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
-                rowGap: "10px",
+                alignItems: "start",
                 padding: "10px",
             }}
         >
