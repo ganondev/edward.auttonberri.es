@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useMemo, useState} from 'react';
-import { getSteamApps, SteamApp } from '../../util/service-requests/steam-requests';
-import {GlowSurfaceNew} from "../themed/GlowSurface";
-import {glowString, theme} from "../../util/cssbuild";
+import { getSteamApps, SteamApp } from '../../../util/service-requests/steam-requests';
+import {GlowSurfaceNew} from "../../themed/GlowSurface";
+import {glowString, theme} from "../../../util/cssbuild";
 
 type GameStatProps = { apps: number[] };
 

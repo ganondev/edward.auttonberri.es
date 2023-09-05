@@ -1,7 +1,7 @@
 import React from 'react';
 import downscale from '../../img/downscale.png';
 import GlowSurface from '../themed/GlowSurface';
-import GameStat from '../gamestat/GameStat';
+import GameStat from './cards/GameStat';
 import './Home.css';
 
 export default function Home() {
