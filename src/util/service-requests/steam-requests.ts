@@ -33,7 +33,8 @@ export async function getSteamApps(): Promise<R<SteamHoursResponse>> {
 }
 
 const shortNames: {[id: number]: string} = {
-    730: "CS:GO"
+    730: "CS:GO",
+    440: "TF2",
 };
 
 export class SteamApp {
@@ -62,6 +63,32 @@ export class SteamApp {
 
     }
 
+    get rawTime() {
+        return this.app.playtime_forever;
+    }
+
+    get lastPlayed() {
+        return this.app.rtime_last_played;
+    }
+
+    get timeSincePlayed() {
+        const date = new Date(0);
+        date.setUTCSeconds(this.lastPlayed);
+        const diff = Number(new Date()) - Number(date);
+        const seconds = diff / 1000;
+        if (seconds < 60) return "Just Now";
+        const minutes = seconds / 60;
+        if (minutes < 60) return timeStamp(minutes, "minute");
+        const hours = minutes / 60;
+        if (hours < 24) return timeStamp(hours, "hour");
+        const days = hours / 24;
+        if (days < 14) return timeStamp(days, "day");
+        const weeks = days / 7;
+        if (weeks < 52) return timeStamp(weeks, "week");
+        const years = days / 365;
+        return timeStamp(years, "year");
+    }
+
     constructor(private app: SteamGame) {}
 
     //TODO make other requests to get this stuff
@@ -82,8 +109,13 @@ class TimeStruct {
 
 }
 
+function timeStamp(value: number, unit: string) {
+    const floored = Math.floor(value);
+    return `${floored} ${pluralizeIfNeeded(floored, unit)} ago`;
+}
+
 function pluralizeIfNeeded(n: number, string: string): string {
 
-    return string + (n !== 1 && "s");
+    return string + (n !== 1 ? "s" : "");
 
 }
