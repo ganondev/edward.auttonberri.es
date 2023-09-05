@@ -23,7 +23,24 @@ interface Star {
     size: number;
     speed: number;
     tercile: Tercile;
+    color: string;
 
+}
+
+function of256(range: number) {
+    return Math.floor(Math.random() * range) + 256 - range;
+}
+
+function randomColor() {
+    // return range[Math.floor(Math.random()*range.length)];
+    const omit = Math.floor(Math.random() * 3);
+    const strongRed = Math.random() > 0.9;
+    const strongBlue = Math.random() > 0.9;
+    const r = omit == 0 ? 256 : of256(strongRed ? 128 : 64);
+    const b = omit == 1 ? 256 : of256(strongBlue ? 128 : 64);
+    const g = omit == 2 ? 256 : Math.min(of256(32), r, b);
+
+    return `rgb(${r}, ${g}, ${b})`;
 }
 
 class Stars {
@@ -70,8 +87,9 @@ class Stars {
             x: oldStar ? this.xStart : Math.random() * this.xStart,
             y: Math.random() * this.height,
             size: Math.random() * SIZE_RANGE + MIN_SIZE,
+            color: randomColor(),
             speed: SPEED / parallaxSize,
-            tercile: tercile
+            tercile: tercile,
 
         };
 
@@ -148,15 +166,12 @@ const ScapeNew: FC = () => {
         {
 
             ctx!.clearRect(0, 0, W, H);
-            ctx!.fillStyle = "white";
-            ctx!.beginPath();
             stars.stars.forEach((star) => {
 
-                ctx!.moveTo(star.x, star.y);
-                ctx!.rect(star.x, star.y, star.size, star.size);
+                ctx!.fillStyle = star.color;
+                ctx!.fillRect(star.x, star.y, star.size, star.size);
 
             });
-            ctx!.fill();
 
             stars.redrawStars();
 
