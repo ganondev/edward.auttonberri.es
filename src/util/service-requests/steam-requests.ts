@@ -49,7 +49,7 @@ export class SteamApp {
 
         return shortNames[this.appId] || (
             this.name.length > 12
-                ? this.name.slice(0, 12) + "..."
+                ? this.name.slice(0, 12).trim() + "..."
                 : this.name
         );
 
