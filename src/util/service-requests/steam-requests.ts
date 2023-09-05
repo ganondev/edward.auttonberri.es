@@ -47,7 +47,11 @@ export class SteamApp {
 
     get shortName(): string {
 
-        return shortNames[this.appId] || this.name;
+        return shortNames[this.appId] || (
+            this.name.length > 12
+                ? this.name.slice(0, 12) + "..."
+                : this.name
+        );
 
     }
 
@@ -78,15 +82,15 @@ export class SteamApp {
         const seconds = diff / 1000;
         if (seconds < 60) return "Just Now";
         const minutes = seconds / 60;
-        if (minutes < 60) return timeStamp(minutes, "minute");
+        if (minutes < 60) return timeStamp(minutes, "mi");
         const hours = minutes / 60;
-        if (hours < 24) return timeStamp(hours, "hour");
+        if (hours < 24) return timeStamp(hours, "hr");
         const days = hours / 24;
-        if (days < 14) return timeStamp(days, "day");
+        if (days < 14) return timeStamp(days, "dy");
         const weeks = days / 7;
-        if (weeks < 52) return timeStamp(weeks, "week");
+        if (weeks < 52) return timeStamp(weeks, "wk");
         const years = days / 365;
-        return timeStamp(years, "year");
+        return timeStamp(years, "yr");
     }
 
     constructor(private app: SteamGame) {}

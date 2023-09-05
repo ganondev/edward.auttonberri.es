@@ -92,7 +92,6 @@ const GameStat: FC = () => {
                             textShadow: glowString(theme.textGold, 1, 9, 13),
                         }}>Recently Played Games</span>
                         <div style={{
-                            width: "95%",
                             display: "flex",
                             flexDirection: "column",
                             rowGap: "3px",
@@ -104,13 +103,14 @@ const GameStat: FC = () => {
                                         flexDirection: "row",
                                         justifyContent: "space-between",
                                         alignItems: "center",
+                                        whiteSpace: "nowrap",
+                                        columnGap: "5px",
                                     }}
                                     key={app.appId}
                                 >
                                     <span style={{
                                         color: theme.textBlue,
                                         textShadow: glowString(theme.textBlue, 3, 9, 11),
-                                        maxWidth: "50%",
                                     }}>{app.shortName}</span>
                                     <span
                                         style={{
@@ -133,7 +133,7 @@ const GameStat: FC = () => {
                             textShadow: glowString(theme.textGold, 1, 9, 13),
                         }}>Most Played Games</span>
                         <div style={{
-                            width: "95%",
+                            width: "100%",
                         }}>
                             {mostPlayed.map(app => (
                                 <div
@@ -141,7 +141,9 @@ const GameStat: FC = () => {
                                         display: "flex",
                                         flexDirection: "row",
                                         justifyContent: "space-between",
-                                        width: "100%",
+                                        alignItems: "center",
+                                        whiteSpace: "nowrap",
+                                        columnGap: "5px",
                                     }}
                                     key={app.appId}
                                 >
