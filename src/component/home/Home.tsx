@@ -3,6 +3,7 @@ import downscale from '../../img/downscale.png';
 import GlowSurface from '../themed/GlowSurface';
 import GameStat from './cards/GameStat';
 import './Home.css';
+import {Projects} from "./cards/Projects";
 
 export default function Home() {
 
@@ -28,7 +29,9 @@ export default function Home() {
             <div style={{margin: "auto"}}>
                 <GameStat/>
             </div>
-            <div style={{margin: "auto"}}/>
+            <div style={{margin: "auto"}}>
+                <Projects/>
+            </div>
         </div>
     );
 

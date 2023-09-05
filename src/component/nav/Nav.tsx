@@ -9,7 +9,7 @@ export function Header() {
         <header>
             <div>
                 <div className="glow">
-                    <Link to="." >Edward Auttonberry</Link>
+                    <Link to="." id="banner">Edward Auttonberry</Link>
                 </div>
                 <nav>
                     <ul>

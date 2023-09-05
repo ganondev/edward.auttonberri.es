@@ -27,7 +27,7 @@ a:hover
 
 }
 
-li a:hover
+a:hover:not(#banner)
 {
     text-shadow: 0px 0px 5px red;
 }
