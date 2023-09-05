@@ -26,7 +26,7 @@ export default function Home() {
                 </GlowSurface>
             </div>
             <div style={{margin: "auto"}}>
-                <GameStat apps={[570, 730]}></GameStat>
+                <GameStat/>
             </div>
             <div style={{margin: "auto"}}/>
         </div>

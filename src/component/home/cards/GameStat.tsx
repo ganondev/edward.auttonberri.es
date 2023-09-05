@@ -3,9 +3,7 @@ import { getSteamApps, SteamApp } from '../../../util/service-requests/steam-req
 import {GlowSurfaceNew} from "../../themed/GlowSurface";
 import {glowString, theme} from "../../../util/cssbuild";
 
-type GameStatProps = { apps: number[] };
-
-const GameStat: FC<GameStatProps> = ({apps}) => {
+const GameStat: FC = () => {
 
     const [steamApps, setSteamApps] = useState<SteamApp[]>([]);
     const [steamApiError, setSteamApiError] = useState<boolean>(false);
@@ -36,7 +34,7 @@ const GameStat: FC<GameStatProps> = ({apps}) => {
                 console.error(e);
                 setSteamApiError(true);
             });
-    }, [apps]);
+    }, []);
 
     return (
         <>
