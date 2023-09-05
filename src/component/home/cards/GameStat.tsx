@@ -83,7 +83,6 @@ const GameStat: FC = () => {
                     }}
                 >
                     <GlowSurfaceNew style={{
-                        flexDirection: "column",
                         alignItems: "center",
                         rowGap: "10px",
                         padding: "10px",
@@ -125,7 +124,6 @@ const GameStat: FC = () => {
                         </div>
                     </GlowSurfaceNew>
                     <GlowSurfaceNew style={{
-                        flexDirection: "column",
                         alignItems: "center",
                         rowGap: "10px",
                         padding: "10px",

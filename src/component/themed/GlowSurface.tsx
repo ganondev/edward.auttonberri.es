@@ -44,6 +44,7 @@ export const GlowSurfaceNew: FC<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>
             border: style?.border || '1px solid green',
             boxShadow: style?.boxShadow || '0px 0px 3px 1px green',
             display: style?.display || "flex",
+            flexDirection: style?.flexDirection || "column",
             minWidth: style?.minWidth || "fit-content",
         }}
         {...rest}
