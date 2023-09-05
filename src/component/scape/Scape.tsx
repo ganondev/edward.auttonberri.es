@@ -32,7 +32,11 @@ function of256(range: number) {
 }
 
 function randomColor() {
-    // return range[Math.floor(Math.random()*range.length)];
+
+    if (Math.random() > 0.66) {
+        return "white";
+    }
+
     const omit = Math.floor(Math.random() * 3);
     const strongRed = Math.random() > 0.9;
     const strongBlue = Math.random() > 0.9;
