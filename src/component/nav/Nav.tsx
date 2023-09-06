@@ -20,7 +20,7 @@ export function Header() {
                             <Link to="/portfolio">[Portfolio]</Link>
                         </li>
                         <li>
-                            <Link to="/coolescheiBe">[S-Index]</Link>
+                            <Link to="/coolescheiße">[S-Index]</Link>
                         </li>
                     </ul>
                 </nav>

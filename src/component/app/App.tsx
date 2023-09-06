@@ -3,7 +3,7 @@ import { RouterProvider, createBrowserRouter, Outlet } from 'react-router-dom';
 import './App.css';
 import { Footer, Header } from '../nav/Nav';
 import Home from '../home/Home';
-import { Scheissliste } from '../coolsheiBe/shitlist'
+import {ScheißlisteNeue} from '../coolsheiBe/shitlist'
 import Page404 from '../page404/Page404'
 import Scape from '../scape/Scape';
 import {Portfolio, AboutMe, EmbedResume, Experience, Projects} from '../portfolio/Portfolio';
@@ -38,8 +38,8 @@ const router = createBrowserRouter([
                 element: <Home />,
             },
             {
-                path: "/coolescheiBe",
-                element: <Scheissliste />,
+                path: "/coolescheiße",
+                element: <ScheißlisteNeue />,
             },
             {
                 path: "/portfolio",

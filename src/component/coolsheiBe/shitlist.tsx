@@ -1,123 +1,124 @@
-import React, { Component, CSSProperties, ReactNode } from 'react';
-import GlowSurface from '../themed/GlowSurface'
-import * as css from '../../util/cssbuild';
-import { concatStyles as cat } from '../../util/cssbuild';
-import { getShit, ScheissDaten } from '../../util/service-requests/shitlist-requests';
+import React, {FC} from 'react';
+import {GlowSurfaceNew} from '../themed/GlowSurface'
+import {glowString, theme} from '../../util/cssbuild';
 import './shitlist.css';
 
-//TODO it doesn't need to take the width of the whole screen
-export class Scheissliste extends Component<{}, {shit: ScheissDaten[]}> {
-	
-	constructor(props: {}) {
-		
-		super(props);
-		this.state = { shit: [] };
-		
-	}
-	
-	componentDidMount() {
-		
-		getShit((shits) => this.setState({ shit: shits }));
-		
-	}
-    
-    render() {
+interface Scheiß {
+	name: string;
+	link: string;
+	description: string;
+}
 
-        return (<div style={{margin: "10px", marginTop: "75px"}}>
-					<GlowSurface>
-						<table style={css.concatStyles(css.marginedTable(2), css.neonGlowOut(), {borderSpacing: "0px", borderCollapse: "collapse", tableLayout: "fixed"})}>
-							<tbody>
-								<Titelscheiss><td align="center" colSpan={2} style={css.neonGlowText("white")}><b>THE</b> epitomical list of cool stuff</td></Titelscheiss>
-								<tr style={css.neonGlowOut()}>
-									<td align="center" colSpan={2}>
-										<input placeholder={"" /*"Make this work, give it a nice border, have it position better, and make the font match"*/} style={{color: "white", background: "black", border: "none", width: "100%"}}/>
-									</td>
-								</tr>
-								<tr>
-									{
-										//TODO Overflow hidden
-									}
-									<td align="center" style={cat({overflow: "hidden"}, css.neonGlowOut(), css.neonGlowText(css.theme.textBlue))}>Thing</td>
-									<td align="center" style={cat({overflow: "hidden"}, css.neonGlowOut(), css.neonGlowText(css.theme.textBlue))}>Description</td>
-								</tr>
-								{
-									//TODO there should be a little spacing after the header rows
-									this.state.shit.map(
-									
-										(shit) => {
-											
-											return(<Scheissstueck key={shit.name} data={shit}/>);
-											
-										}
-										
-									)
-									
-								}
-							</tbody>
-						</table>
-					</GlowSurface>
-				</div>
-		);
+const scheißen: Scheiß[] = [
+	{
+		name: "Sedja",
+		link: "https://www.sejda.com/",
+		description: "Online PDF editor for quick and dirty forgeries",
+	},
+	{
+		name: "sendvid",
+		link: "http://sendvid.com",
+		description: "Easy short term video sharing."
+	},
+	{
+		name: "temp.sh",
+		link: "http://temp.sh",
+		description: "Quick and handy file and text sharing."
+	},
+	{
+		name: "catgasm.cc",
+		link: "https://catgasm.cc/",
+		description: "Random cat generator."
+	}
+];
 
-    }
+interface ScheißRudernProps {
+	item: React.JSX.Element;
+	description: React.JSX.Element;
+}
+
+const ScheißRudern: FC<ScheißRudernProps> = ({item, description}) => {
+
+	return (
+		<div style={{
+			display: "flex",
+			flexDirection: "row",
+			width: "100%",
+			padding: "10px 0",
+			boxShadow: `0 8px 5px -5px ${theme.green}`,
+			margin: "5px 0",
+		}}>
+			<div style={{
+				display: "flex",
+				justifyContent: "center",
+				alignItems: "center",
+				flex: 1,
+			}}>
+				{item}
+			</div>
+			<div style={{
+				display: "flex",
+				justifyContent: "center",
+				flex: 2,
+			}}>
+				{description}
+			</div>
+		</div>
+	)
 
 }
 
-type BaseScheissState = { content: ReactNode };
+export const ScheißlisteNeue: FC = () => {
 
-abstract class BaseScheiss<T> extends Component<T, BaseScheissState> {
+	return (
+		<GlowSurfaceNew style={{
+			margin: "75px auto",
+			alignItems: "center",
+			width: "60%",
+			padding: "50px 10vw",
+		}}>
+			<span style={{
+				marginBottom: "20px",
+				color: "white",
+				textShadow: glowString("white", 2, 5),
+			}}><b>THE</b> epitomical list of cool shit</span>
+			<ScheißRudern
+				item={(
+					<span style={{
+						color: theme.textBlue,
+						textShadow: glowString(theme.textBlue, 2, 5),
+					}}>Thing</span>
+				)}
+				description={(
+					<span style={{
+						color: theme.textBlue,
+						textShadow: glowString(theme.textBlue, 2, 5),
+					}}>Description</span>
+				)}
+			/>
+			{
+				scheißen.map(s => {
+					return (
+						<ScheißRudern
+							item={(
+								<a
+									className="item-link"
+									href={s.link}
+								>
+									[{s.name}]
+								</a>
+							)}
+							description={(
+								<span style={{
+									textAlign: "center",
+									color: theme.textGreen,
+								}}>{s.description}</span>
+							)}
+						/>
+					);
+				})
+			}
+		</GlowSurfaceNew>
+	)
 
-	private opts = {};
-
-	private style: CSSProperties;
-
-	state = { content: <></> }
-
-	constructor(props: T) {
-		
-		super(props);
-		
-		this.style = {
-			
-			textAlign: "center"
-			
-		};
-		
-	}
-
-	render() {
-
-        return (<tr {...this.opts} style={this.style}>{this.state.content}</tr>);
-
-    }
-
-}
-
-type ScheissstueckProps = { data: ScheissDaten };
-
-class Scheissstueck extends BaseScheiss<ScheissstueckProps> {
-	
-	componentDidMount() {
-		
-		this.setState({ content: <>
-			<td style={css.neonGlowOut()}>
-				<a href={this.props.data.link} className="item-link">
-					{this.props.data.name}
-				</a>
-			</td>
-			<td style={css.neonGlowOut()}>{this.props.data.description}</td>
-		</>});
-
-	}
-
-}
-
-class Titelscheiss extends BaseScheiss<{ children: ReactNode }> {
-
-	componentDidMount() {
-		
-		this.setState({content: this.props.children});
-		
-	}
-	
 }
