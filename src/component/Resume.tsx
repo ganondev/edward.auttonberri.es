@@ -45,7 +45,7 @@ export const Resume: FC = () => {
 
                 </div>
             </div>
-            <embed src={resume}  style={{
+            <embed src={`${resume}#view=FitV`} style={{
                 height: "100%",
                 width: "100%",
             }}/>
