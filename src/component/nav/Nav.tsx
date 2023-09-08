@@ -2,25 +2,24 @@ import React, {FC, useEffect, useMemo, useState} from 'react';
 import { getQuote, Quote } from '../../util/service-requests/quote-requests';
 import { Link } from 'react-router-dom';
 import './Nav.css';
+import {glowString, theme} from "../../util/cssbuild";
 
 export function Header() {
 
     return (
         <header>
             <div>
-                <div className="glow">
-                    <Link to="." id="banner">Edward Auttonberry</Link>
+                <div style={{
+                    padding: "5px 15px"
+                }}>
+                    <Link
+                        to="/"
+                        id="banner"
+                        style={{
+                            fontSize: "30px",
+                        }}
+                    >Edward Auttonberry</Link>
                 </div>
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to="/resume">[Resume]</Link>
-                        </li>
-                        <li>
-                            <Link to="/coolescheiße">[S-Index]</Link>
-                        </li>
-                    </ul>
-                </nav>
             </div>
         </header>
     );
