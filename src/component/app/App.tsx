@@ -6,7 +6,6 @@ import Home from '../home/Home';
 import {ScheißlisteNeue} from '../coolsheiBe/shitlist'
 import Page404 from '../page404/Page404'
 import Scape from '../scape/Scape';
-import {Portfolio, AboutMe, EmbedResume, Experience, Projects} from '../portfolio/Portfolio';
 import {FCWithChildren} from '../../util';
 import {Resume} from "../Resume";
 
@@ -45,28 +44,6 @@ const router = createBrowserRouter([
             {
                 path: "/resume",
                 element: <Resume />,
-            },
-            {
-                path: "/portfolio",
-                element: <Portfolio />,
-                children: [
-                    {
-                        path: "/portfolio",
-                        element: <AboutMe />,
-                    },
-                    {
-                        path: "/portfolio/projects",
-                        element: <Projects />,
-                    },
-                    {
-                        path: "/portfolio/experience",
-                        element: <Experience />,
-                    },
-                    {
-                        path: "/portfolio/resume",
-                        element: <EmbedResume />,
-                    }
-                ]
             },
         ]
     },

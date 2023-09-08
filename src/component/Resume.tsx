@@ -1,12 +1,12 @@
 import React, {FC} from "react";
-import {GlowSurfaceNew} from "./themed/GlowSurface";
+import {GlowSurface} from "./themed/GlowSurface";
 import resume from "../img/resume.pdf";
 import {glowString, theme} from "../util/cssbuild";
 import {NavLink} from "react-router-dom";
 
 export const Resume: FC = () => {
     return (
-        <GlowSurfaceNew
+        <GlowSurface
             style={{
                 width: "50vw",
                 height: "65vh",
@@ -49,6 +49,6 @@ export const Resume: FC = () => {
                 height: "100%",
                 width: "100%",
             }}/>
-        </GlowSurfaceNew>
+        </GlowSurface>
     )
 }

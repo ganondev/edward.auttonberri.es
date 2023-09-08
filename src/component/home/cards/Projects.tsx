@@ -1,5 +1,5 @@
 import React, {FC, useState} from "react";
-import {GlowSurfaceNew} from "../../themed/GlowSurface";
+import {GlowSurface} from "../../themed/GlowSurface";
 import {glowString, theme} from "../../../util/cssbuild";
 
 export const Projects: FC = () => {
@@ -7,7 +7,7 @@ export const Projects: FC = () => {
     const [fellfieldLabel, setLabel] = useState("[Fellfield (WIP)]");
 
 
-    return <GlowSurfaceNew
+    return <GlowSurface
         style={{
             alignItems: "center",
             rowGap: "10px",
@@ -32,5 +32,5 @@ export const Projects: FC = () => {
                 setLabel("No link yet :T");
             }}>{fellfieldLabel}</a>
         </div>
-    </GlowSurfaceNew>
+    </GlowSurface>
 }

@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {GlowSurfaceNew} from '../themed/GlowSurface'
+import {GlowSurface} from '../themed/GlowSurface'
 import {glowString, theme} from '../../util/cssbuild';
 import './shitlist.css';
 
@@ -71,7 +71,7 @@ const ScheißRudern: FC<ScheißRudernProps> = ({item, description}) => {
 export const ScheißlisteNeue: FC = () => {
 
 	return (
-		<GlowSurfaceNew style={{
+		<GlowSurface style={{
 			margin: "75px auto",
 			alignItems: "center",
 			width: "60%",
@@ -118,7 +118,7 @@ export const ScheißlisteNeue: FC = () => {
 					);
 				})
 			}
-		</GlowSurfaceNew>
+		</GlowSurface>
 	)
 
 }

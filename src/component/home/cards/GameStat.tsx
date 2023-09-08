@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useMemo, useState} from 'react';
 import { getSteamApps, SteamApp } from '../../../util/service-requests/steam-requests';
-import {GlowSurfaceNew} from "../../themed/GlowSurface";
+import {GlowSurface} from "../../themed/GlowSurface";
 import {glowString, theme} from "../../../util/cssbuild";
 
 const GameStat: FC = () => {
@@ -39,7 +39,7 @@ const GameStat: FC = () => {
     return (
         <>
             {steamApiError && (
-                <GlowSurfaceNew style={{
+                <GlowSurface style={{
                     flexDirection: "column",
                     alignItems: "center",
                     padding: "10px",
@@ -56,10 +56,10 @@ const GameStat: FC = () => {
                             textAlign: "center"
                         }}
                     >Normally game statistics from my Steam profile would show here, but there was an API error :(</span>
-                </GlowSurfaceNew>
+                </GlowSurface>
             )}
             {!steamApiError && !steamApps.length && (
-                <GlowSurfaceNew style={{
+                <GlowSurface style={{
                     flexDirection: "column",
                     alignItems: "center",
                     padding: "10px",
@@ -72,7 +72,7 @@ const GameStat: FC = () => {
                         fontWeight: "bold",
                         textAlign: "center"
                     }}>Loading game stats from the Steam public API...</span>
-                </GlowSurfaceNew>
+                </GlowSurface>
             )}
             {!!steamApps.length && (
                 <div
@@ -82,7 +82,7 @@ const GameStat: FC = () => {
                         rowGap: "10px",
                     }}
                 >
-                    <GlowSurfaceNew style={{
+                    <GlowSurface style={{
                         alignItems: "center",
                         rowGap: "10px",
                         padding: "10px",
@@ -122,8 +122,8 @@ const GameStat: FC = () => {
                             ))
                             }
                         </div>
-                    </GlowSurfaceNew>
-                    <GlowSurfaceNew style={{
+                    </GlowSurface>
+                    <GlowSurface style={{
                         alignItems: "center",
                         rowGap: "10px",
                         padding: "10px",
@@ -161,7 +161,7 @@ const GameStat: FC = () => {
                             ))
                             }
                         </div>
-                    </GlowSurfaceNew>
+                    </GlowSurface>
                 </div>
             )}
         </>

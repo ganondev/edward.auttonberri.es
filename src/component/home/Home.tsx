@@ -1,6 +1,6 @@
 import React from 'react';
 import downscale from '../../img/downscale.png';
-import GlowSurface, {GlowSurfaceNew} from '../themed/GlowSurface';
+import {GlowSurface} from '../themed/GlowSurface';
 import GameStat from './cards/GameStat';
 import './Home.css';
 import {Projects} from "./cards/Projects";
@@ -21,7 +21,7 @@ export default function Home() {
                 <img src={downscale} className="me" alt="A sexy guy."/>
             </div>
             <div style={{margin: "auto"}}>
-                <GlowSurfaceNew
+                <GlowSurface
                     style={{
                         alignItems: "center",
                         rowGap: "10px",
@@ -38,7 +38,7 @@ export default function Home() {
                         <li><Link to="/resume">[Resume]</Link></li>
                         <li><Link to="/coolescheiße">[S-Index]</Link></li>
                     </ul>
-                </GlowSurfaceNew>
+                </GlowSurface>
             </div>
             <div style={{margin: "auto"}}>
                 <GameStat/>
