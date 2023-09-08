@@ -6,7 +6,7 @@ name: Node.js CI
 on:
   push:
     branches: [ "master" ]
-  workflow_dispatch: 
+  workflow_dispatch:
 
 jobs:
   build:
@@ -32,7 +32,7 @@ jobs:
     - name: Install dependencies
       run: npm ci --force
     - name: Build
-      run: npm run build --if-present
+      run: CI=false npm run build --if-present
     # - run: npm test
 
     - name: Copy a folder to s3

@@ -40,9 +40,9 @@ function randomColor() {
     const omit = Math.floor(Math.random() * 3);
     const strongRed = Math.random() > 0.9;
     const strongBlue = Math.random() > 0.9;
-    const r = omit == 0 ? 256 : of256(strongRed ? 128 : 64);
-    const b = omit == 1 ? 256 : of256(strongBlue ? 128 : 64);
-    const g = omit == 2 ? 256 : Math.min(of256(32), r-5, b-5);
+    const r = omit === 0 ? 256 : of256(strongRed ? 128 : 64);
+    const b = omit === 1 ? 256 : of256(strongBlue ? 128 : 64);
+    const g = omit === 2 ? 256 : Math.min(of256(32), r-5, b-5);
 
     return `rgb(${r}, ${g}, ${b})`;
 }

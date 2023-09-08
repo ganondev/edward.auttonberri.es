@@ -2,7 +2,6 @@ import React, {FC, useEffect, useMemo, useState} from 'react';
 import { getQuote, Quote } from '../../util/service-requests/quote-requests';
 import { Link } from 'react-router-dom';
 import './Nav.css';
-import {glowString, theme} from "../../util/cssbuild";
 
 export function Header() {
 
