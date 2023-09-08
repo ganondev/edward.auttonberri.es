@@ -8,6 +8,7 @@ import Page404 from '../page404/Page404'
 import Scape from '../scape/Scape';
 import {Portfolio, AboutMe, EmbedResume, Experience, Projects} from '../portfolio/Portfolio';
 import {FCWithChildren} from '../../util';
+import {Resume} from "../Resume";
 
 const Root: FCWithChildren = ({children}) => {
     return (
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
             {
                 path: "/coolescheiße",
                 element: <ScheißlisteNeue />,
+            },
+            {
+                path: "/resume",
+                element: <Resume />,
             },
             {
                 path: "/portfolio",

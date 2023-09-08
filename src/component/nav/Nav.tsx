@@ -14,10 +14,7 @@ export function Header() {
                 <nav>
                     <ul>
                         <li>
-                            <Link to="/">[Front]</Link>
-                        </li>
-                        <li>
-                            <Link to="/portfolio">[Portfolio]</Link>
+                            <Link to="/resume">[Resume]</Link>
                         </li>
                         <li>
                             <Link to="/coolescheiße">[S-Index]</Link>
