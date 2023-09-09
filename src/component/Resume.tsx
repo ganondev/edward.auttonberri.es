@@ -1,6 +1,5 @@
 import React, {FC} from "react";
 import {GlowSurface} from "./themed/GlowSurface";
-import resume from "../img/resume.pdf";
 import {glowString, theme} from "../util/cssbuild";
 import {NavLink} from "react-router-dom";
 
@@ -45,7 +44,7 @@ export const Resume: FC = () => {
 
                 </div>
             </div>
-            <embed src={`${resume}#view=FitV`} style={{
+            <embed src="https://auttonberri.es/static/resume/resume.pdf#view=FitV" style={{
                 height: "100%",
                 width: "100%",
             }}/>
