@@ -121,5 +121,9 @@ const quotes: Quote[] = [
     {
         quote: "Ecce homo, qui est faba!",
         source: "The intro to Mr. Bean",
+    },
+    {
+        quote: "Pink is good for you",
+        author: "My wife",
     }
 ]
