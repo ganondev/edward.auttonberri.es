@@ -35,7 +35,6 @@ export default function Home() {
                     <ul>
                         <li key="1"><a href="https://github.com/ganondev">[GitHub]</a></li>
                         <li key="3"><a href="https://www.linkedin.com/in/edward-auttonberry">[LinkedIn]</a></li>
-                        <li><Link to="/resume">[Resume]</Link></li>
                         <li><Link to="/coolescheiße">[S-Index]</Link></li>
                     </ul>
                 </GlowSurface>
